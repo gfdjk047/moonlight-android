@@ -80,8 +80,14 @@ public class PcView extends Activity implements AdapterFragmentCallbacks {
                     // Now make the binder visible
                     managerBinder = localBinder;
 
-                    // Start updates
-                    startComputerUpdates();
+                    // miu: seed the hardcoded host (if not yet present) before first poll
+                    MiuHelper.ensureHost(localBinder, PcView.this, new Runnable() {
+                        @Override
+                        public void run() {
+                            // Start updates
+                            startComputerUpdates();
+                        }
+                    });
 
                     // Force a keypair to be generated early to avoid discovery delays
                     new AndroidCryptoProvider(PcView.this).getClientCertificate();
