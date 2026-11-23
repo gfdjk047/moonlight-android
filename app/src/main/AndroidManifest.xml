@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAPTURE_KEYBOARD" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="com.android.providers.tv.permission.READ_EPG_DATA"/>
     <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA"/>
 
@@ -177,6 +180,46 @@
         <service
             android:name=".binding.input.driver.UsbDriverService"
             android:label="Usb Driver Service" />
+
+        <!-- ===== Miu 求助模块 ===== -->
+        <service
+            android:name=".miu.MiuHelpService"
+            android:label="Miu 求助模式"
+            android:foregroundServiceType="connectedDevice" />
+        <service
+            android:name=".miu.MiuGestureService"
+            android:label="Miu 操控注入"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/miu_gesture_service_config" />
+        </service>
+        <activity
+            android:name=".miu.MiuHelpActivity"
+            android:label="Miu 求助模式"
+            android:exported="true"
+            android:resizeableActivity="true"
+            android:enableOnBackInvokedCallback="true"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
+            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
+            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
+        </activity>
+        <!-- 桌面独立入口：朋友一眼两图标（串流 / 求助） -->
+        <activity-alias
+            android:name=".miu.MiuHelpLauncher"
+            android:label="Miu 求助"
+            android:icon="@mipmap/ic_launcher"
+            android:targetActivity=".miu.MiuHelpActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <activity
             android:name=".HelpActivity"
