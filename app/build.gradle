@@ -81,6 +81,17 @@ android {
         }
     }
 
+    signingConfigs {
+        miuRelease {
+            if (rootProject.hasProperty('MIU_KEYSTORE_PASSWORD')) {
+                storeFile rootProject.file('miu-release.keystore')
+                storePassword MIU_KEYSTORE_PASSWORD
+                keyAlias 'miu'
+                keyPassword MIU_KEYSTORE_PASSWORD
+            }
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
@@ -124,6 +135,10 @@ android {
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            if (rootProject.hasProperty('MIU_KEYSTORE_PASSWORD')) {
+                signingConfig signingConfigs.miuRelease
+            }
         }
     }
 
