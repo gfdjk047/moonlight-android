@@ -201,25 +201,13 @@
         <activity
             android:name=".miu.MiuHelpActivity"
             android:label="Miu 求助模式"
-            android:exported="true"
+            android:exported="false"
             android:resizeableActivity="true"
             android:enableOnBackInvokedCallback="true"
             android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
             <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
             <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
         </activity>
-        <!-- 桌面独立入口：朋友一眼两图标（串流 / 求助） -->
-        <activity-alias
-            android:name=".miu.MiuHelpLauncher"
-            android:label="Miu 求助"
-            android:icon="@mipmap/ic_launcher"
-            android:targetActivity=".miu.MiuHelpActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
 
         <activity
             android:name=".HelpActivity"
