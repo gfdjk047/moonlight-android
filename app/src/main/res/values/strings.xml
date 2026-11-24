@@ -306,4 +306,5 @@
 
     <!-- Miu 求助模块 -->
     <string name="miu_gesture_desc">Miu 远程协助：允许你信任的人在获得你同意后操控这台手机。仅在你主动同意的会话期间生效，不会自动开启。</string>
+    <string name="miu_help_button_desc">求助模式</string>
 </resources>
