@@ -153,6 +153,15 @@ public class PcView extends Activity implements AdapterFragmentCallbacks {
                 startActivity(new Intent(PcView.this, StreamSettings.class));
             }
         });
+
+        // miu: 求助模式入口（同一 APP 内，无需第二个图标）
+        ImageButton miuHelpButton = findViewById(R.id.miuHelpButton);
+        miuHelpButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PcView.this, com.limelight.miu.MiuHelpActivity.class));
+            }
+        });
         addComputerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
